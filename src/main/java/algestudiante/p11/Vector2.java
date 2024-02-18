@@ -21,7 +21,7 @@ public static void main (String arg [] )
 	t2=System.currentTimeMillis();	// milisegundos actuales despu�s del c�digo a medir
 
 	System.out.println ("t1="+t1+"  *** t2="+t2);
-	System.out.println ("Tama�o del problema = "+n+"\t"+"Tiempo m�todo suma = "+(t2-t1));
+	System.out.println ("Tamaño del problema = "+n+"\t"+"Tiempo método suma = "+(t2-t1));
 
 	System.out.println ("Resultado de la suma de elementos = "+ s);
 } // fin de main
