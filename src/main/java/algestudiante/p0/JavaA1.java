@@ -11,7 +11,7 @@ public class JavaA1 {
 			t1 = System.currentTimeMillis();
 			lPrimos = listadoPrimos(n);
 			t2 = System.currentTimeMillis();
-			System.out.println("n = " + n + " *** tiempo = " + (t2-t1) + "milisegundos");
+			System.out.println("n = " + n + " *** tiempo = " + (t2-t1) + " milisegundos");
 		}
 	}
 
