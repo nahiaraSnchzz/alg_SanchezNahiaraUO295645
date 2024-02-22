@@ -3,7 +3,7 @@ package algestudiante.p12;
 public class Bucle6 {
 	
 
-public static long bucle4(int n)
+public static long bucle6(int n)
 {
 	long cont = 0;
 	for (int i = 1; i <= n; i++)
@@ -29,7 +29,7 @@ public static void main(String arg[])
 	t1 = System.currentTimeMillis();
 
 	for (int repeticiones = 1; repeticiones <= nVeces; repeticiones++) 
-		c = bucle4(n);
+		c = bucle6(n);
 			
 
 	t2 = System.currentTimeMillis();
