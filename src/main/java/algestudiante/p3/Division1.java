@@ -5,6 +5,7 @@ public class Division1
 
 static long cont;
 
+// a = 1 , b = 3, k =1
 public static void rec1 (int n)
 { 
 	if (n<=0) 
