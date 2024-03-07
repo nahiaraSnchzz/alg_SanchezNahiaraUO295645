@@ -1,4 +1,4 @@
-package algestudiante.p2;
+package algestudiante.p3;
 
 import java.util.Random ;
 
@@ -7,7 +7,7 @@ Clase de utilidad, que genera para un vector los 3 ordenes
 Tambien escribe el contenido de un vector
 */
 
-public class Vector
+public class Vector2
 {
 
 /*  Este metodo devuelve valores ya ordenados */

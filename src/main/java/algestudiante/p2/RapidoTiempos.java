@@ -13,8 +13,6 @@ public static void main (String arg [])
 {
 long t1,t2;
 String opcion=arg[0];
-int inferior = Integer.parseInt(arg[1]);
-int superior = Integer.parseInt(arg[2]);
 
 	
 for (int n= 250_000; n<=1_000_000_000; n*= 2)
