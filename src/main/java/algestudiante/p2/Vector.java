@@ -33,7 +33,7 @@ public static void ordenAleatorio (int[]a)
 	int n= a.length;
 	for(int i=0;i<n;i++)
    		a[i]=r.nextInt(100_000_000);
-		// p.e valores entre 0 y 99_999
+		// p.e valores entre 0 y 999_999
 }     
 
 /*  Este metodo escribe los componentes del vector	 */
