@@ -4,16 +4,18 @@ public class Division5 {
 
 	static long cont;
 
-// a=n, b = 1, k = 0
+// a=4, b = 2, k = 0
 	public static void rec5(int n) {
 		if (n <= 0)
 			cont++;
 		else {
+			
 			cont++; // O(1)
 			
-			for (int i = 0; i < n /2; i++) {
-				rec5(n / 2);
-			}
+			rec5(n/2);
+			rec5(n/2);
+			rec5(n/2);
+			rec5(n/2);
 		}
 
 	}
