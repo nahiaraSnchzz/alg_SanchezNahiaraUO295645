@@ -1,33 +1,50 @@
 import Auxiliar as aux;
 import math as math;
 
+def Prim(matriz):
+    """Tras meter el nombre en un fichero, calcula y escribe por 
+    pantalla la solución óptima"""
+    #aux.escribirMatriz(matriz)
+    visitados = [False] * len(matriz)
+    aristasMinimas = []
+    visitados[0] = True
+    while visitados.count(True) != len(matriz) :
+        Minimo (visitados, matriz, aristasMinimas)
 
-def Prim(nombreFichero):
-    """Tras meter el nombre de un fichero, calcule y escriba por pantalla la solución óptima."""
+    return aristasMinimas
+
+
+def PrimFichero(nombreFichero):
+    """Tras meter el nombre en un fichero, calcula y escribe por 
+    pantalla la solución óptima"""
     matriz = aux.matrizTriangularDesdeFichero(nombreFichero)
-    aux.escribirMatriz(matriz)
-    primerNodo = matriz [0][1]
-    visitados = [primerNodo]
-    aristaMinima = CalculaAristaMinima(matriz, 0)
-    print(aristaMinima)
+    #aux.escribirMatriz(matriz)
+    visitados = [False] * len(matriz)
+    aristasMinimas = []
+    visitados[0] = True
+    while visitados.count(True) != len(matriz) :
+        Minimo (visitados, matriz, aristasMinimas)
+
+    return aristasMinimas
 
 
-def CalculaAristaMinima(matriz, fila):
-    """Busca la arista minima"""
+
+def Minimo (visitados, matriz, aristasMinimas):
+    """Encuentra la arista mínima"""
     minimo = math.inf
-    for j in range (1,len(matriz)-1):
+    indiceMin = -1
 
-        if (matriz[fila][j] < minimo):
-
-            minimo = matriz[fila][j]
-
-    return minimo
-
-
-def GetListaAristas(matriz,fila):
-    """Devuelve una lista con los valores de las aristas en la fila pasada como parametro"""
-    
-
-Prim("grafo4.txt")
+    for i in range (len(matriz)):
+        for j in range (len(matriz)):
+            if (j > i and i != j and matriz[i][j] < minimo and visitados[j] == False and visitados[i] == True):
+                minimo = matriz[i][j]
+                indiceMin = j
+    visitados[indiceMin] = True
+    aristasMinimas.append(minimo)
 
 
+
+
+print(PrimFichero("grafo4.txt"))
+
+print(PrimFichero("grafo8.txt"))
