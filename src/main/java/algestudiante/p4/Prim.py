@@ -18,7 +18,7 @@ def PrimFichero(nombreFichero):
     """Tras meter el nombre en un fichero, calcula y escribe por 
     pantalla la solución óptima"""
     matriz = aux.matrizTriangularDesdeFichero(nombreFichero)
-    #aux.escribirMatriz(matriz)
+    aux.escribirMatriz(matriz)
     visitados = [False] * len(matriz)
     aristasMinimas = []
     visitados[0] = True
@@ -45,6 +45,8 @@ def Minimo (visitados, matriz, aristasMinimas):
 
 
 
-print(PrimFichero("grafo4.txt"))
+#print(PrimFichero("grafo4.txt"))
 
-print(PrimFichero("grafo8.txt"))
+#print(PrimFichero("grafo8.txt"))
+
+print(PrimFichero("grafo32.txt"))
