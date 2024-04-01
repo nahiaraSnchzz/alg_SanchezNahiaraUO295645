@@ -26,7 +26,7 @@ public class PatternMatchingTest {
 		for (int i = 0; i < patterns.size(); i++) {			
 			patternMatching.checkPattern(patterns.get(i));
 			assertEquals(expectedResults.get(i), patternMatching.checkPattern(patterns.get(i)));
-			patternMatching.printsTable();	
+			//patternMatching.printsTable();	
 		}
 	}
 	

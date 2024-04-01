@@ -1,10 +1,7 @@
 package algestudiante.p5;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PatternMatching {
-	
+
 	char[][] tableroCaracteres;
 	Boolean[][] tablero;
 	String texto;
@@ -17,49 +14,82 @@ public class PatternMatching {
 	}
 
 	public Boolean checkPattern(String patron) {
-		
-		tablero = new Boolean[texto.length()+1][patron.length()+1];
-		tableroCaracteres = new char[texto.length()+1][patron.length()+1];
+
+		tablero = new Boolean[texto.length() +1][patron.length()+1];
+		tableroCaracteres = new char[tablero.length+1][tablero.length+1];
 		this.patron = patron;
+		int falso = 0;
+
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+
+				// caso base
+				if (i == 0 && j == 0) {
+					tablero[i][j] = true;
+					
+				} else if (i == 0 && j>0) {
+					tablero[i][j] = false;
+				}
+
+				else if (j == 0 && i >0) {
+					tablero[i][j] = false;
+					
+				} else if (i > 0 && j > 0) {
+					// coinciden
+					if (texto.charAt(i - 1) == patron.charAt(j - 1) && tablero[i - 1][j - 1] == true) {
+						tablero[i][j] = true;
+					}
+					// no coinciden
+					else {
+						tablero[i][j] = false;
+					}
+
+					// Otros casos:
+
+					if (patron.charAt(j - 1) == '?') {
+						if (tablero[i - 1][j - 1] == true) {
+							tablero[i][j] = true;
+						} else if (tablero[i][j - 1] == true) {
+							tablero[i][j] = true;
+						} else {
+							tablero[i][j] = false;
+						}
+					} else if (patron.charAt(j - 1) == '*') {
+						if (tablero[i - 1][j - 1] == true) {
+							tablero[i][j] = true;
+						} else if (tablero[i][j - 1] == true) {
+							tablero[i][j] = true;
+						} else if (tablero[i - 1][j] = true) {
+							tablero[i][j] = true;
+						} else {
+							tablero[i][j] = false;
+						}
+
+					}
+				}
+				
+				
+				
+
+			}
+
+		}
+		
 		inicializarTableroCaracteres();
 		
-		for (int i = 1; i < patron.length()+1; i++) {
-			for (int j = 1; j < patron.length()+1; j++) {
-				
-				// caso base
-				if (i == 1 && j == 1) {
-					tablero[i][j] = true;
-				}
-				else if (i == 1 && tablero[i][j] != true) {
-					tablero[i][j] = false;
-				}
-				
-				else if (j == 1 && tablero[i][j] != true) {
-					tablero[i][j] = false;
-				}
-				
-				
-				
-			}
-			
-		}
-		return null;
-
+		return tablero[tablero.length-1][tablero[0].length-1];
 	}
-	
+
 	private void inicializarTableroCaracteres() {
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j=0; j < tablero[i].length; j++) {
+		for (int i = 0; i < tableroCaracteres.length; i++) {
+			for (int j = 0; j < tableroCaracteres[i].length; j++) {
 				if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 1 && j == 0)) {
 					tableroCaracteres[i][j] = ' ';
-				}
-				else if ((i == 0 && j != 0)) {
+				} else if ((i == 0 && j != 0)) {
 					tableroCaracteres[i][j] = 't';
-				}
-				else if ((i != 0 && j == 0)) {
+				} else if ((i != 0 && j == 0)) {
 					tableroCaracteres[i][j] = 'p';
-				}
-				else {
+				} else {
 					tableroCaracteres[i][j] = 'b';
 				}
 			}
@@ -68,19 +98,21 @@ public class PatternMatching {
 
 	public void printsTable() {
 		for (int i = 0; i < tableroCaracteres.length; i++) {
-			for (int j=0; j < tableroCaracteres[i].length; j++) {
-				
+			for (int j = 0; j < tableroCaracteres[i].length; j++) {
+
 				if (tableroCaracteres[i][j] == ' ') {
-					System.out.print("   ");
-				}
-				else if (tableroCaracteres[i][j] == 't') {
-					System.out.print(texto.charAt(i - 2) + "  ");
-				}
-				else if (tableroCaracteres[i][j] == 'p') {
-					System.out.print(patron.charAt(i - 2) + "  ");
-				}
-				else {
-					System.out.print("f  ");
+					System.out.print("    ");
+				} else if (tableroCaracteres[i][j] == 't') {
+					System.out.print(texto.charAt(i) + "   ");
+				} else if (tableroCaracteres[i][j] == 'p') {
+					System.out.print(patron.charAt(j) + "   ");
+				} else {
+					if (tablero[i][j].booleanValue() == true) {
+						System.out.print("T   ");
+					} else {
+						System.out.print("F   ");
+					}
+
 				}
 			}
 		}
