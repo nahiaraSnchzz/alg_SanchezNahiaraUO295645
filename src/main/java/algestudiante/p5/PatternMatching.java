@@ -16,7 +16,7 @@ public class PatternMatching {
 	public Boolean checkPattern(String patron) {
 
 		tablero = new Boolean[texto.length() +1][patron.length()+1];
-		tableroCaracteres = new char[tablero.length+1][tablero.length+1];
+		tableroCaracteres = new char[tablero.length+1][tablero[0].length+1];
 		this.patron = patron;
 		int falso = 0;
 
@@ -33,8 +33,8 @@ public class PatternMatching {
 
 				else if (j == 0 && i >0) {
 					tablero[i][j] = false;
-					
-				} else if (i > 0 && j > 0) {
+				}
+				if (i > 0 && j > 0) {
 					// coinciden
 					if (texto.charAt(i - 1) == patron.charAt(j - 1) && tablero[i - 1][j - 1] == true) {
 						tablero[i][j] = true;
