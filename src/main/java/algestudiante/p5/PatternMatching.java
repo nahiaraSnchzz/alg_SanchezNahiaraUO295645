@@ -59,7 +59,7 @@ public class PatternMatching {
 							tablero[i][j] = true;
 						} else if (tablero[i][j - 1] == true) {
 							tablero[i][j] = true;
-						} else if (tablero[i - 1][j] = true) {
+						} else if (tablero[i - 1][j] == true) {
 							tablero[i][j] = true;
 						} else {
 							tablero[i][j] = false;
@@ -86,9 +86,9 @@ public class PatternMatching {
 				if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 1 && j == 0)) {
 					tableroCaracteres[i][j] = ' ';
 				} else if ((i == 0 && j != 0)) {
-					tableroCaracteres[i][j] = 't';
-				} else if ((i != 0 && j == 0)) {
 					tableroCaracteres[i][j] = 'p';
+				} else if ((i != 0 && j == 0)) {
+					tableroCaracteres[i][j] = 't';
 				} else {
 					tableroCaracteres[i][j] = 'b';
 				}
@@ -97,17 +97,27 @@ public class PatternMatching {
 	}
 
 	public void printsTable() {
+		
+		int t = 0;
+		int p = 0;
+		System.out.println();
+		System.out.println();
+		
 		for (int i = 0; i < tableroCaracteres.length; i++) {
+			
 			for (int j = 0; j < tableroCaracteres[i].length; j++) {
-
+				
 				if (tableroCaracteres[i][j] == ' ') {
 					System.out.print("    ");
-				} else if (tableroCaracteres[i][j] == 't') {
-					System.out.print(texto.charAt(i) + "   ");
+				} 
+				else if (tableroCaracteres[i][j] == 't') {
+					System.out.print(texto.charAt(t) + "   ") ;
+					t++;
 				} else if (tableroCaracteres[i][j] == 'p') {
-					System.out.print(patron.charAt(j) + "   ");
+					System.out.print(patron.charAt(p) + "   ");
+					p++;
 				} else {
-					if (tablero[i][j].booleanValue() == true) {
+					if (tablero[i-1][j-1].booleanValue() == true) {
 						System.out.print("T   ");
 					} else {
 						System.out.print("F   ");
@@ -115,7 +125,11 @@ public class PatternMatching {
 
 				}
 			}
+			System.out.println();
 		}
+		
+		System.out.println();
+		System.out.println();
 
 	}
 
