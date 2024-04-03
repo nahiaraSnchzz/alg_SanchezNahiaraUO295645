@@ -18,7 +18,6 @@ public class PatternMatching {
 		tablero = new Boolean[texto.length() +1][patron.length()+1];
 		tableroCaracteres = new char[tablero.length+1][tablero[0].length+1];
 		this.patron = patron;
-		int falso = 0;
 
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
@@ -67,9 +66,7 @@ public class PatternMatching {
 
 					}
 				}
-				
-				
-				
+								
 
 			}
 
