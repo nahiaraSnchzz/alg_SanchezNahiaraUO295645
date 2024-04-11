@@ -12,12 +12,17 @@ public class CuadradoNumerico {
 	private String[][] table;
 	private String[][] numTable;
 	private String[][] tableroFichero;
+	private int[] valoresPosibles = {0,1,2,3,4,5,6,7,8,9};
 	private int tamano;
 	private int size;
 
-	public void Main() {
-		loadData("test00.txt");
-		printTable();
+	public static void main(String[] args) {
+		CuadradoNumerico cuadradoNumerico = new CuadradoNumerico("src/main/java/algestudiante/p6/test00.txt");
+		cuadradoNumerico.printTable();
+	}
+
+	public CuadradoNumerico(String nameFile) {
+		loadData(nameFile);
 	}
 
 	public void loadData(String fileName) {
@@ -32,7 +37,7 @@ public class CuadradoNumerico {
 
 			table = new String[size][size];
 			tableroFichero = new String[size][size];
-			numTable = new String[this.tamano+1][this.tamano+1];
+			numTable = new String[this.tamano + 1][this.tamano + 1];
 
 			while (reader.ready()) {
 
@@ -51,7 +56,7 @@ public class CuadradoNumerico {
 				}
 			}
 
-			 createTable();
+			createTable();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -67,17 +72,17 @@ public class CuadradoNumerico {
 	}
 
 	void createTable() {
-		
+
 		for (int i = 0; i < table.length; i++) {
 			int count = 0;
 			for (int j = 0; j < table[i].length; j++) {
 
 				if ((tableroFichero[i][tableroFichero[i].length - 1]) == null) {
 
-					if (table[i][j] == null && j == tableroFichero[0].length-1){
+					if (table[i][j] == null && j == tableroFichero[0].length - 1) {
 						table[i][j] = " ";
 					}
-					
+
 					if (table[i][j] == null) {
 						table[i][j] = tableroFichero[i][count];
 						table[i][j + 1] = " ";
@@ -93,11 +98,10 @@ public class CuadradoNumerico {
 		}
 
 	}
-	
-	
+
 	public void convertNum() {
-		
-		for (int i = 0; i <table.length; i++) {
+
+		for (int i = 0; i < table.length; i++) {
 			int m = 0;
 			for (int j = 0; j < table[i].length; j++) {
 				if (table[i][j] == "?") {
@@ -105,6 +109,16 @@ public class CuadradoNumerico {
 					m++;
 				}
 			}
+		}
+	}
+
+	private void calculaValores() {
+		
+		for (int i=0; i < numTable.length; i++) {
+			int j = 0;
+		
+			
+			
 		}
 	}
 
