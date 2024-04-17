@@ -1,146 +1,81 @@
 package algestudiante.p6;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-public class CuadradoNumerico {
-	// calcule para una entrada de tablero dada una solución de la forma más
+public class CuadradoNumerico extends CuadradoNumericoBase {
+	// calcule para una entrada de tablero dada una soluci n de la forma m s
 	// eficiente posible
 
-	private String[][] table;
-	private String[][] numTable;
-	private String[][] tableroFichero;
-	private int[] valoresPosibles = {0,1,2,3,4,5,6,7,8,9};
-	private int tamano;
-	private int size;
+	private boolean esSolucion;
 
-	public static void main(String[] args) {
-		CuadradoNumerico cuadradoNumerico = new CuadradoNumerico("src/main/java/algestudiante/p6/test00.txt");
-		cuadradoNumerico.printTable();
+	public CuadradoNumerico(String[][] t) {
+		table = new String[t.length][t[0].length];
+		for (int i = 0; i < t.length; i++) {
+			for (int j = 0; j < t.length; j++) {
+				this.table[i][j] = t[i][j];
+			}
+		}
+		this.solucion = new String[t.length][t[0].length];
+
 	}
 
-	public CuadradoNumerico(String nameFile) {
-		loadData(nameFile);
-	}
+	
 
-	public void loadData(String fileName) {
+	@Override
+	public void backtrackingRecursivo(int nivel, int f, int c) {
+		// Finaliza el proceso si se completa la tabla
+		if (esSolucion(f, c)) {
+			// comprueba si la columna se lleno de manera correcta
 
-		BufferedReader reader = null;
+			if (comprobarColumnas() && comprobarFilas()) {
+				//System.out.println("Solucion encontrada");
 
-		try {
-			reader = new BufferedReader(new FileReader(fileName));
-			String tamano = reader.readLine();
-			this.tamano = Integer.parseInt(tamano);
-			size = Integer.parseInt(tamano) * 2 + 1;
-
-			table = new String[size][size];
-			tableroFichero = new String[size][size];
-			numTable = new String[this.tamano + 1][this.tamano + 1];
-
-			while (reader.ready()) {
-
-				String[] parts = reader.readLine().split(" ");
-
-				for (int i = 0; i < tableroFichero.length; i++) {
-
-					for (int j = 0; j < parts.length; j++) {
-
-						tableroFichero[i][j] = parts[j];
-					}
-					if (i + 1 < tableroFichero.length) {
-						parts = reader.readLine().split(" ");
-
-					}
+				this.esSolucion = true;
+				guardarSolucion();
+			}
+		} else {
+			if (c == 0 && f > 0 && f < table.length - 1) {
+				if (!comprobarFila(f - 2)) {
+					return;
 				}
 			}
 
-			createTable();
+			int[] siguientePosicion = siguientePosiblePosicion(f, c);
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+			for (int number = 0; number < 10; number++) {
+				if (!esSolucion) {
+					table[f][c] = Integer.toString(number);
 
-	void createTable() {
+					backtrackingRecursivo(nivel + 1, siguientePosicion[0], siguientePosicion[1]);
 
-		for (int i = 0; i < table.length; i++) {
-			int count = 0;
-			for (int j = 0; j < table[i].length; j++) {
-
-				if ((tableroFichero[i][tableroFichero[i].length - 1]) == null) {
-
-					if (table[i][j] == null && j == tableroFichero[0].length - 1) {
-						table[i][j] = " ";
-					}
-
-					if (table[i][j] == null) {
-						table[i][j] = tableroFichero[i][count];
-						table[i][j + 1] = " ";
-						count++;
-
-					}
-
-				} else {
-
-					table[i][j] = tableroFichero[i][j];
 				}
 			}
+			// restaurar
+			table[f][c] = "?";
 		}
-
+	}
+	public int getNumberOfSolutions()
+	{
+		return 0;
 	}
 
-	public void convertNum() {
 
+
+	@Override
+	protected void guardarSolucion() {
 		for (int i = 0; i < table.length; i++) {
-			int m = 0;
 			for (int j = 0; j < table[i].length; j++) {
-				if (table[i][j] == "?") {
-					numTable[i][m] = table[i][j];
-					m++;
-				}
+				solucion[i][j] = table[i][j];
 			}
 		}
 	}
 
-	private void calculaValores() {
-		
-		for (int i=0; i < numTable.length; i++) {
-			int j = 0;
-		
-			
-			
-		}
+
+
+	@Override
+	protected String[][] getSol() {
+		return solucion;
 	}
-
-	void printTable() {
-		int t = 0;
-		int p = 0;
-		System.out.println();
-		System.out.println();
-
-		for (int i = 0; i < table.length; i++) {
-
-			for (int j = 0; j < table[i].length; j++) {
-
-				System.out.print(table[i][j] + "          ");
-			}
-			System.out.println();
-			System.out.println();
-		}
-
-		System.out.println();
-		System.out.println();
-
-	}
+	
 
 }
+
+
