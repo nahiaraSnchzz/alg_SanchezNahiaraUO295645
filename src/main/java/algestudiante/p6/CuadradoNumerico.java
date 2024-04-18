@@ -7,7 +7,9 @@ public class CuadradoNumerico extends CuadradoNumericoBase {
 	private boolean esSolucion;
 
 	public CuadradoNumerico(String[][] t) {
+		
 		table = new String[t.length][t[0].length];
+		
 		for (int i = 0; i < t.length; i++) {
 			for (int j = 0; j < t.length; j++) {
 				this.table[i][j] = t[i][j];
@@ -23,7 +25,7 @@ public class CuadradoNumerico extends CuadradoNumericoBase {
 	public void backtrackingRecursivo(int nivel, int f, int c) {
 		// Finaliza el proceso si se completa la tabla
 		if (esSolucion(f, c)) {
-			// comprueba si la columna se lleno de manera correcta
+			// comprueba si las columnas y filas se llenaron de manera correcta
 
 			if (comprobarColumnas() && comprobarFilas()) {
 				//System.out.println("Solucion encontrada");

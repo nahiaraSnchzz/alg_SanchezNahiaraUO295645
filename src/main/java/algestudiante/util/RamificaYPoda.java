@@ -48,6 +48,7 @@ public class RamificaYPoda
 			}
 
 			ArrayList<Estado> hijos = actual.expandir(); 	// expandimos todos los hijos válidos del estado acutal
+			// expandir devuelve todos los hijos validos
 
 			// Recorre todos los hijos creados comprobando que están por debajo de la cota de poda
 			for (Estado estadoHijo : hijos)
