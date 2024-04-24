@@ -28,8 +28,6 @@ public class CuadradoNumericoRamifica extends Estado
 		
 		n = table.length;
 		
-		/**/if (RamificaYPoda.TRAZA)
-			//imprimirCostes();
 		
 		for (int i=0; i< table.length; i++) {
 			for (int j = 0; j < table[i].length; j++) {
@@ -100,10 +98,30 @@ public class CuadradoNumericoRamifica extends Estado
 	@Override
 	public ArrayList<Estado> expandir() {
 		ArrayList<Estado> listaHijos= new ArrayList<Estado>();
+		
+		int fila = -1;
+		int columna = -1;
+		
+		for (int i=0; i < table.length; i++	) {
+			for (int j=0; j < table[i].length; j++) {
+				if (table[i][j].equals("?")) {
+					fila = i;
+					columna = j;
+					break;
+				}
+			}
+			if (columna != -1) {
+				break;
+			}
+		}
+		
+		if (fila == -1 && columna == -1) {
+			return listaHijos;
+		}
 
-		// Recorre todas las tareas
-		for (int j=0; j<10; j++)
-			if (esSolucion())  // Crea hijo s�lo para tareas NO asignadas
+		
+		for (int numero = 0; numero < 10; numero++)
+			if (esSolucion(fila,columna))  // Crea hijo s�lo para tareas NO asignadas
 			{
 				if (comprobarColumnas() && comprobarFilas()) {
 					Estado estadoHijo= new CuadradoNumericoRamifica(this,j); 
@@ -111,11 +129,7 @@ public class CuadradoNumericoRamifica extends Estado
 				}
 				
 				
-					if (RamificaYPoda.TRAZA)  // imprimimos estado hijo generado
-					{
-						System.out.println("Nivel: "+profundidad+" - Hijo: "+j);
-						System.out.println(estadoHijo);
-					}
+					
 			}
 
 		return listaHijos;
