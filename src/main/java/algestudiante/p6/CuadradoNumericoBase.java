@@ -3,6 +3,7 @@ package algestudiante.p6;
 public abstract class CuadradoNumericoBase {
 	protected String[][] table;
 	protected String[][] solucion;
+	
 	public abstract void backtrackingRecursivo(int a,int b,int c);
 	public abstract int getNumberOfSolutions();
 	
