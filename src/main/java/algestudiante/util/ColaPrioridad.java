@@ -1,5 +1,5 @@
-// ESTRUCTURA DE DATOS DE TIPO MONT�CULO
-// OFRECE UN COMPORTAMIENTO LOGAR�TMICO
+// ESTRUCTURA DE DATOS DE TIPO MONT CULO
+// OFRECE UN COMPORTAMIENTO LOGAR TMICO
 // PARA METER NODOS Y SACAR EL MEJOR
 
 package algestudiante.util;
@@ -19,8 +19,8 @@ public class ColaPrioridad
 	private PriorityQueue<Estado> nodos;
 
 	// Guarda estados ya desarrollados 
-	// para componer la soluci�n y tambi�n
-	// para saber qu� nodos han sido tratados	
+	// para componer la soluci n y tambi n
+	// para saber qu  nodos han sido tratados	
 	private HashMap<UUID,Estado> nodosUsados; 
 
 	public ColaPrioridad(boolean comprobarRepetido) 
@@ -33,10 +33,10 @@ public class ColaPrioridad
 	public void insertar(Estado nodo) 
 	{
 		// Gestiona tema de estados repetidos:
-		// Si no est� activada la comprobaci�n, inserta directamente en la cola
-		// Si est� activada, comprueba si est� repetido --> entonces no lo inserta
+		// Si no est  activada la comprobaci n, inserta directamente en la cola
+		// Si est  activada, comprueba si est  repetido --> entonces no lo inserta
 		// De esta forma evitamos volver a comprobar estados ya comprobados, 
-		// que podr�an formar bucles infinitos
+		// que podr an formar bucles infinitos
 		if (!comprobarRepetido || !nodoRepetido(nodo)) 
 		{
 			nodos.add(nodo);
@@ -51,7 +51,7 @@ public class ColaPrioridad
 	private boolean nodoRepetido(Estado nodo) 
 	{
 		// Recorre todos los estados ya explorados
-		// creando una colecci�n que se puede recorrer secuencialmente
+		// creando una colecci n que se puede recorrer secuencialmente
 		for (Estado n:nodosUsados.values())
 		{
 			if (nodo.equals(n))
@@ -61,8 +61,8 @@ public class ColaPrioridad
 	}
 
 	/**
-	 * Comprueba si la cola de prioridad est� vac�a
-	 * @return true- si la cola est� vac�a
+	 * Comprueba si la cola de prioridad est  vac a
+	 * @return true- si la cola est  vac a
 	 */
 	public boolean vacia() 
 	{
@@ -70,8 +70,8 @@ public class ColaPrioridad
 	}
 
 	/**
-	 * Accede a la cola de prioridad y consulta el estado m�s prometedor; pero no lo extrae
-	 * @return valor del heur�stico del estado m�s prometedor
+	 * Accede a la cola de prioridad y consulta el estado m s prometedor; pero no lo extrae
+	 * @return valor del heur stico del estado m s prometedor
 	 */
 	public int estimacionMejor() 
 	{
@@ -79,15 +79,15 @@ public class ColaPrioridad
 	}
 
 	/**
-	 * Devuelve estado m�s prometedor de la cola de prioridad y lo elimina
-	 * @return Devuelve estado m�s prometedor
+	 * Devuelve estado m s prometedor de la cola de prioridad y lo elimina
+	 * @return Devuelve estado m s prometedor
 	 */
 	public Estado sacarMejorNodo() 
 	{
 		Estado nodo=nodos.poll();
 		nodosUsados.put(nodo.getId(),nodo);
 		// lo guardamos porque puede ser parte de la 
-		// soluci�n. Adem�s, de este modo podemos 
+		// soluci n. Adem s, de este modo podemos 
 		// saber si un nodo ya ha sido tratado
 		return nodo;
 	}
@@ -103,7 +103,7 @@ public class ColaPrioridad
 	{
 		ArrayList<Estado> resultado= new ArrayList<Estado>();
 
-		resultado.add(nodo); //a�adimos el �ltimo nodo tratado
+		resultado.add(nodo); //a adimos el  ltimo nodo tratado
 		UUID idPadre = nodo.getIdPadre(); //buscamos su padre
 
 		while (idPadre != null) 

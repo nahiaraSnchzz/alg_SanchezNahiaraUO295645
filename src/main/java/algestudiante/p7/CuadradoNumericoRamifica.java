@@ -1,17 +1,17 @@
 package algestudiante.p7;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import algestudiante.util.Estado;
 import algestudiante.util.RamificaYPoda;
 
+
+
 /**
- * Estado Asignaci�n Agentes - Tareas Hereda de la clase Estado
+ * Estado Asignaci n Agentes - Tareas Hereda de la clase Estado
  */
 public class CuadradoNumericoRamifica extends Estado {
 	// Datos comunes a todos los estados, por eso los declaramos "static"
-	private static int n; // Tama�o del problema, n�m. agentes y n�m. tareas
+	private static int n; // Tama o del problema, n m. agentes y n m. tareas
 	// Estado
 	private String[][] table;
 	private String[][] solucion;
@@ -29,10 +29,10 @@ public class CuadradoNumericoRamifica extends Estado {
 		super();
 
 		n = table.length;
-		this.table = new String[table.length][table[0].length];
+		this.table = new String[n][n];
 
-		for (int i = 0; i < table.length; i++) {
-			for (int j = 0; j < table[i].length; j++) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
 				this.table[i][j] = table[i][j];
 			}
 		}
@@ -41,9 +41,8 @@ public class CuadradoNumericoRamifica extends Estado {
 		this.esSolucion = false;
 		this.solucion = new String[table.length][table[0].length];
 
-		int[] pos = siguienteCeldaParaRellenar(0, 0); // posicion que relleno el padre
-		x = pos[0];
-		y = pos[1]; // posicion que tiene que rellenar el hijo
+		x = 0;
+		y = 0; // posicion que tiene que rellenar el hijo
 
 	}
 
@@ -52,30 +51,24 @@ public class CuadradoNumericoRamifica extends Estado {
 	 * 
 	 * Es el utilizado en el metodo expandir.
 	 */
-	public CuadradoNumericoRamifica(CuadradoNumericoRamifica padre, int valor) {
+	public CuadradoNumericoRamifica(CuadradoNumericoRamifica padre, int valor, int x, int y) {
 		super();
 		// copiamos toda la informacion del padre
 
 		profundidad = padre.profundidad;
 		idPadre = padre.getId();
-		this.table = new String[padre.table.length][padre.table[0].length];
-		for (int i = 0; i < padre.table.length; i++) {
-			for (int j = 0; j < padre.table[i].length; j++) {
+		this.table = new String[n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
 				this.table[i][j] = padre.table[i][j];
 			}
 		}
-		this.x = padre.x;
-		this.y = padre.y;
-
+		this.x = x;
+		this.y = y;
+		table[x][y] = String.valueOf(valor);
 		// añade lo correspondiente a este hijo
 		// rellenar la siguiente celda del cuadado numerico
-		if (!table[x][y].equals("?")) {
-			int[] pos = siguienteCeldaParaRellenar(padre.x, padre.y); // posicion que relleno el padre
-			x = pos[0];
-			y = pos[1]; // posicion que tiene que rellenar el hijo
-		}
 
-		table[x][y] = "" + valor;
 		profundidad++;
 		calcularValorHeuristico();
 
@@ -96,47 +89,77 @@ public class CuadradoNumericoRamifica extends Estado {
 		return new int[] { f, c };
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("VALOR HEURISTICO = " + valorHeuristico + "\n-----------------------------------\n");
+		for (int i = 0; i < table.length; i++) {
+			for (int j = 0; j < table[i].length; j++) {
+				if (table[i][j] == null)
+					sb.append("\t");
+				else
+					sb.append(table[i][j] + "\t");
+			}
+			sb.append("\n\n");
+		}
+		return sb.toString();
+	}
+
 	/**
 	 * ESTA SEMANA NO. PARA LA SEMANA QUE VIENE SIN HEURISTICOS Calcula el valor del
-	 * heur�stico y lo guarda
+	 * heur stico y lo guarda
 	 */
 	@Override
 	public void calcularValorHeuristico() {
-		valorHeuristico = 10;
+		int contador = 0;
+
+		for (int i = 0; i < n - 2; i += 2) {
+			boolean tieneInterrogacion = false;
+			for (int j = 0; j < n - 2; j += 2) {
+				if (table[i][j].equals("?")) {
+					contador++;
+					tieneInterrogacion = true;
+				}
+				if (contador == 0 && i == n - 3 && j > 0) {
+					if (comprobarColumna(j - 2)) {
+						;
+					} else {
+						valorHeuristico = Integer.MAX_VALUE;
+					}
+				}
+			}
+			if (!tieneInterrogacion) {
+				if (comprobarFila(i))
+					;
+				else {
+					valorHeuristico = Integer.MAX_VALUE;
+				}
+			}
+		}
+		if (valorHeuristico != Integer.MAX_VALUE)
+			valorHeuristico = contador;
 	}
 
 	@Override
 	public ArrayList<Estado> expandir() {
 		ArrayList<Estado> listaHijos = new ArrayList<Estado>();
+		int[] si = { x, y };
+		if (!table[x][y].equals("?")) {
+			si = siguienteCeldaParaRellenar(x, y);
+		}
 
-		for (int j = 0; j < 10; j++) {
-			Estado estadoHijo = new CuadradoNumericoRamifica(this, j);
-
-			// si el tablero esta completo y correcto:
-			if (isSol()) {
-				if (comprobarFilas() && comprobarColumnas()) {
-					this.esSolucion = true;
-					guardarSolucion();
-				}
-			}
-			// si el estado hijo es correcto:
-			else {
-				if (y == 0 && x > 0 && x < table.length - 1) {
-					if (!comprobarFila(x - 2)) {
-						break;
-					}
-				}
-				
+		int fila = si[0];
+		int columna = si[1];
+		if (fila < n - 2)
+			for (int j = 0; j < 10; j++) {
+				Estado estadoHijo = new CuadradoNumericoRamifica(this, j, fila, columna);
+				// si el tablero esta completo y correcto:
 				listaHijos.add(estadoHijo);
-				table[x][y] = Integer.toString(j);
 				if (RamificaYPoda.TRAZA) {
 					System.out.println("Nivel: " + profundidad + " - Hijo: " + j);
 					System.out.println(estadoHijo);
 				}
-
 			}
-		}
-
 		return listaHijos;
 
 	}
@@ -155,9 +178,10 @@ public class CuadradoNumericoRamifica extends Estado {
 
 	@Override
 	public boolean solucion() {
-		if (comprobarFila(x)) {
-			return true;
-		}
+		if (x == n - 3 && y == n - 3)
+			if (comprobarFilas() && comprobarColumnas()) {
+				return true;
+			}
 		return false;
 	}
 
@@ -170,7 +194,7 @@ public class CuadradoNumericoRamifica extends Estado {
 	}
 
 	protected boolean comprobarFilas() {
-		for (int f = 0; f < table.length - 1; f = f + 2) {
+		for (int f = 0; f < table.length - 2; f = f + 2) {
 			if (!comprobarFila(f)) {
 				return false;
 			}
@@ -179,8 +203,9 @@ public class CuadradoNumericoRamifica extends Estado {
 	}
 
 	protected boolean comprobarFila(int f) {
-
-		int resultadoOficial = Integer.parseInt(table[f][table[f].length - 1]);
+		if (table[f][0].equals("?"))
+			return false;
+		int resultadoOficial = Integer.parseInt(table[f][n - 1]);
 		int resultado = Integer.parseInt(table[f][0]);
 
 		for (int c = 1; c < table.length - 3; c = c + 2) {
@@ -301,3 +326,4 @@ public class CuadradoNumericoRamifica extends Estado {
 	}
 
 }
+

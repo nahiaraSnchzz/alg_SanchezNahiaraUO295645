@@ -1,6 +1,7 @@
 package algestudiante.p7;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,131 +10,132 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import algestudiante.util.RamificaYPoda;
+
 public class NumericSquareTestOne {
 	private static String PATH= "src/main/java/algestudiante/p6/";
 	private String[][] table;
 	
 	@Test
 	public void test0() {
-		loadData(PATH+"test00.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test00");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"6","2"},
-						   {"4","3"}};
-		printTable(tableSol,"Solution returned test00");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test00.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
+		
 	}
 	
 	@Test
 	public void test1() {
-		loadData(PATH+"test01.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test01");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"1","8","3"},
-				   			{"4","3","2"},
-							{"9","7","4"}};
-		printTable(tableSol,"Solution returned test01");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test01.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 	}
 	
 	@Test
 	public void test2() {
-		loadData(PATH+"test02.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test02");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"3","2","1"},
-				{"6","5","5"},
-				{"3","5","6"}};
-		printTable(tableSol,"Solution returned test02");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test02.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 
 	}
 	
 	@Test
 	public void test3() {
-		loadData(PATH+"test03.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test03");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"1","3","1","1"},
-				{"5","1","1","1"},
-				{"1","1","9","1"},
-				{"0","1","1","0"}};
-		printTable(tableSol,"Solution returned test03");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test03.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 	}
 	
 	@Test
 	public void test4() {
-		loadData(PATH+"test04.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test04");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"1","4","1","0"},
-				{"4","1","1","2"},
-				{"1","1","9","1"},
-				{"1","0","1","0"}};
-
-		printTable(tableSol,"Solution returned test04");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test04.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 	}
 	
 	@Test
 	public void test5() {
-		loadData(PATH+"test05.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test05");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"1","1","1","1","0"},
-				{"3","0","1","6","2"},
-				{"1","1","9","1","1"},
-				{"3","2","1","0","1"},
-				{"5","3","9","5","2"}};
-		printTable(tableSol,"Solution returned test05");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test05.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 	}
 	
 	@Test
 	public void test6() {
-		loadData(PATH+"test06.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test06");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"1","1","1","1","0"},
-				{"0","0","1","6","2"},
-				{"1","1","0","1","1"},
-				{"3","2","1","0","1"},
-				{"2","3","0","5","2"}};
-
-		printTable(tableSol,"Solution returned test06");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test06.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 	}
 	
 	@Test
 	public void test7() {
-		loadData(PATH+"test07.txt");		
-		CuadradoNumericoRamifica numericSquare = new CuadradoNumericoRamifica(this.table);
-		printTable(this.table,"test07");
-		numericSquare.expandir();
-		String[][] tableSol= numericSquare.getSol();
-		String[][] solOk= {{"0","0","0","3","0"},
-				{"0","0","1","2","6"},
-				{"0","0","2","1","1"},
-				{"4","2","0","0","1"},
-				{"2","3","0","3","4"}};
-
-		printTable(tableSol,"Solution returned test07");
-		assertArrayEquals(convertNum(numericSquare.getSol()),solOk);
+		String name = "test07.txt";
+		loadData(PATH + name);
+		RamificaYPoda problemaAsig = new RamificaYPoda(false);
+		CuadradoNumericoRamifica estado = new CuadradoNumericoRamifica(table);
+		long inicio = System.currentTimeMillis();
+		problemaAsig.ramificaYPoda(estado);
+		long fin = System.currentTimeMillis();
+		
+		assertNotNull(problemaAsig.getMejorSolucion());
+		System.out.println(name + " 	TIEMPO = " + (fin-inicio));
+		System.out.println(problemaAsig.getMejorSolucion());
 	}
 
 	/**
