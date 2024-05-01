@@ -6,6 +6,7 @@ public class CuadradoNumerico extends CuadradoNumericoBase {
 
 	private boolean esSolucion;
 
+	
 	public CuadradoNumerico(String[][] t) {
 		
 		table = new String[t.length][t[0].length];
@@ -16,36 +17,38 @@ public class CuadradoNumerico extends CuadradoNumericoBase {
 			}
 		}
 		this.solucion = new String[t.length][t[0].length];
-
 	}
 
 	
 
 	@Override
 	public void backtrackingRecursivo(int nivel, int f, int c) {
-		// Finaliza el proceso si se completa la tabla
+		// Si la tabla está completa
 		if (esSolucion(f, c)) {
 			// comprueba si las columnas y filas se llenaron de manera correcta
-
 			if (comprobarColumnas() && comprobarFilas()) {
-				//System.out.println("Solucion encontrada");
-
+				
 				this.esSolucion = true;
 				guardarSolucion();
 			}
+			
 		} else {
+			// si acabamos de saltar de fila y es una celda valida
 			if (c == 0 && f > 0 && f < table.length - 1) {
+				// se comprueba la fila anterior
 				if (!comprobarFila(f - 2)) {
+					// vuelve a la iteración anterior
 					return;
 				}
 			}
-
+			// calcula la siguiente posible posicion
 			int[] siguientePosicion = siguientePosiblePosicion(f, c);
-
+			
 			for (int number = 0; number < 10; number++) {
 				if (!esSolucion) {
+					// se pone el numero en la celda
 					table[f][c] = Integer.toString(number);
-
+					
 					backtrackingRecursivo(nivel + 1, siguientePosicion[0], siguientePosicion[1]);
 
 				}
@@ -54,6 +57,8 @@ public class CuadradoNumerico extends CuadradoNumericoBase {
 			table[f][c] = "?";
 		}
 	}
+	
+	// devuelve el numero de soluciones
 	public int getNumberOfSolutions()
 	{
 		return 0;
